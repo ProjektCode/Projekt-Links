@@ -1,0 +1,165 @@
+@keyframes pulse-shadow {
+    0% {
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+    }
+    100% {
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
+    }
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+    background: linear-gradient(135deg, #131313 45%, #000000 100%);
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    color: #FFFFFF; /* Primary text color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh; /* Full viewport height */
+    overflow: hidden; /* Remove scroll bars */
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    background: #990000;
+    padding: 20px;
+    border: 2px solid #FFFFFF; /* White stroke (border) */
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.05); /* Default box shadow */
+    border-radius: 10px;
+    animation: pulse-shadow 4s infinite; /* Apply the pulse shadow animation */
+}
+
+img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
+
+h1 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700; /* Ensure bold weight */
+    margin: 10px 0;
+    color: #FFFFFF; /* White color for the title */
+}
+
+p {
+    font-family: 'Raleway', sans-serif;
+    color: #FFFFFF; /* Primary text color */
+}
+
+.separator {
+    width: 80%;
+    height: 1px;
+    background-color: #FFFFFF; /* White color for the line */
+    margin: 20px auto; /* Spacing around the line */
+    border: none; /* Remove default border */
+}
+
+.link-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two buttons per row */
+    gap: 10px;
+    margin-top: 20px;
+    justify-items: center; /* Center the buttons horizontally */
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center content horizontally */
+    padding: 5px; /* Decreased padding */
+    color: #FFFFFF; /* White color for link text */
+    background: #CC0033; /* Slightly lighter red for links */
+    font-family: 'Nunito', sans-serif;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+    height: 40px; /* Decreased height for smaller buttons */
+    width: 200px; /* Fixed width for buttons */
+    text-align: center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Subtle black drop shadow */
+}
+
+.button:nth-child(odd) {
+    margin-right: -35px; /* Decrease right margin for left buttons */
+}
+
+.button:nth-child(even) {
+    margin-left: -35px; /* Decrease left margin for right buttons */
+}
+
+.button i, .button img {
+    margin-right: 5px; /* Spacing between icon and text */
+}
+
+.button:hover {
+    background: #DC143C; /* Crimson color on hover */
+    transform: scale(1.05);
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.7); /* White drop shadow on hover */
+}
+
+i {
+    color: #FFFFFF; /* White color for icons */
+}
+
+.custom-icon {
+    font-size: 2em; /* Custom size for the icon */
+}
+
+.icon {
+    width: 24px; /* Adjust size to match other icons */
+    height: 24px; /* Adjust size to match other icons */
+    vertical-align: middle;
+}
+
+footer {
+    width: 100%;
+    padding: 10px;
+    background: #131313;
+    color: #FFFFFF;
+    text-align: center;
+    position: relative;
+    font-style: italic; /* Italicized font */
+}
+
+.attribution {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    left: 10px; /* Added to center the attribution */
+    font-size: 12px; /* Smaller font size */
+    text-align: center; /* Center the text horizontally */
+}
+
+.attribution a {
+    color: #FFFFFF; /* White color for the links */
+    text-decoration: none; /* Remove underline */
+}
+
+.attribution a:hover, .attribution a:focus, .attribution a:active, .attribution a:visited {
+    color: #FFFFFF; /* Ensure links remain white */
+    text-decoration: underline; /* Optionally add underline on hover/focus */
+}
+
+.highlight {
+    color: #CC0033; /* Red color used in the background of the main container of the links */
+}
+
+/* Media Queries for Mobile Responsiveness */
+@media (min-width: 600px) {
+    .link-container {
+        grid-template-columns: repeat(2, 1fr); /* Ensure two buttons per row on larger screens */
+    }
+
+    .button {
+        justify-content: center; /* Center content horizontally on larger screens */
+    }
+}
