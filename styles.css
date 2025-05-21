@@ -4,21 +4,30 @@ body {
     margin: 0;
     padding: 0;
     text-align: center;
-    background-color: #121212;
-    /* Primary text color */
+    background-color: #09010d;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     height: 100vh;
-    /* Full viewport height */
     overflow: hidden;
-    /* Remove scroll bars */
+}
 
+body::before {
+    content: "";
+    position: fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom: 0;
     /* New scrolling SVGBox background */
-    background-image: url('https://s2.svgbox.net/heropatterns.svg?ic=hideout&color=ff3399');
-    background-size: 840px auto;
+    background-image: url('https://s2.svgbox.net/heropatterns.svg?ic=hideout&color=0ce6f2');
+    background-repeat: repeat;
+    background-size: 800px auto;
     animation: scroll-bg 20s linear infinite;
+    z-index: 0;
+    pointer-events: none;
+    opacity:0.05;
 }
 
 @keyframes scroll-bg {
@@ -27,21 +36,21 @@ body {
     }
 
     to {
-        background-position: 840px 840px;
+        background-position: 800px 800px;
     }
 }
 
 @keyframes pulse-shadow {
     0% {
-        box-shadow: 0 0 30px rgba(255, 51, 153, 0.1);
+        box-shadow: 0 0 30px rgba(30, 87, 156, 0.1);
     }
 
     50% {
-        box-shadow: 0 0 30px rgba(255, 51, 153, 0.2);
+        box-shadow: 0 0 30px rgba(0, 152, 219, 0.2);
     }
 
     100% {
-        box-shadow: 0 0 30px rgba(255, 51, 153, 0.1);
+        box-shadow: 0 0 30px rgba(30, 87, 156, 0.1);
     }
 }
 
@@ -50,10 +59,10 @@ body {
     width: 100%;
     max-width: 600px;
     margin: auto;
-    background: #5a2a82;
+    background: #270022;
     padding: 20px 30px;
-    border: 2px solid #ff3399;
-    box-shadow: 0 0 30px rgba(255, 51, 153, 0.5);
+    border: 2px solid #0098db;
+    box-shadow: 0 0 30px rgba(12, 230, 242, 0.5);
     border-radius: 10px;
     animation: pulse-shadow 4s infinite;
     overflow: hidden; /* Ensures pattern doesn’t bleed out */
@@ -65,18 +74,21 @@ body {
     position: absolute;
     top: 0;
     left: 0;
+    right: 0;
+    bottom: 0;
     height: 80px;
     /* Pattern height */
     width: 100%;
-    background-image: url('https://s2.svgbox.net/heropatterns.svg?ic=tic-tac-toe&fill=ff55aa33&color=ff3399');
+    background-image: url('https://s2.svgbox.net/heropatterns.svg?ic=tic-tac-toe&fill=ff55aa33&color=ff0546');
     background-repeat: repeat;
     background-size: 200px 200px;
     background-position: 0 0;
-    animation: patternScroll 12s linear infinite;
-    z-index: 1;
+    animation: patternScroll 25s linear infinite;
+    z-index: 0;
     pointer-events: none;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    opacity: 0.05;
 }
 
 /* Ensure actual content stays above the pattern */
@@ -92,12 +104,12 @@ body {
     }
 
     100% {
-        background-position: 500px 0px;
+        background-position: 800px 0px;
     }
 }
 
 .profile-pic {
-    border: 2px solid #ff3399;
+    border: 2px solid #ff0546;
     box-shadow: 0 0 30px rgba(255, 51, 153, 0.5);
 }
 
@@ -125,7 +137,7 @@ p {
 .separator {
     width: 80%;
     height: 1px;
-    background-color: #00c5ff;
+    background-color: #0ce6f2;
     /* Pink color for the line */
     margin: 20px auto;
     /* Spacing around the line */
@@ -155,7 +167,7 @@ p {
     padding: 5px 10px;
     color: #FFFFFF;
     /* White color for link text */
-    background: #7b3fbf;
+    background: #9c173b;
     /* Purple for links */
     font-family: 'Nunito', sans-serif;
     text-decoration: none;
@@ -163,12 +175,12 @@ p {
     transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
     height: 40px;
     width: 80%;
-    box-shadow: 0 0 5px rgba(123, 63, 191, 0.5);
+    box-shadow: 0 0 5px rgba(255, 5, 70, 0.5);
     /* Subtle purple drop shadow */
     overflow: hidden;
     z-index: 0;
     
-    background: linear-gradient(45deg, #7b3fbf, #ff3399);
+    background: linear-gradient(45deg, #9c173b, #ff0546);
     background-size: 200%;
     background-position: 0% 0%;
     transition: background-position 0.5s ease, transform 0.3s, box-shadow 0.3s;
@@ -183,7 +195,7 @@ p {
 .button:hover {
     background-position: 100% 100%;
     transform: scale(1.05);
-    box-shadow: 0 0 5px rgba(255, 51, 153, 0.7);
+    box-shadow: 0 0 5px rgba(156, 23, 59, 0.7);
 }
 
 i {
@@ -207,15 +219,15 @@ i {
 footer {
     width: 100%;
     padding: 10px;
-    background: #121212;
+    background: #17001d;
     color: #FFFFFF;
     text-align: center;
     position: relative;
     font-style: italic;
     /* Italicized font */
-    border-top: 2px solid #ff3399;
+    border-top: 2px solid #1e579c;
     /* Pink stroke (border) */
-    box-shadow: 0 0 30px rgba(255, 51, 153, 0.1);
+    box-shadow: 0 0 30px rgba(30, 87, 156, 0.1);
     /* Pink glow */
     border-radius: 10px;
 }
@@ -250,7 +262,7 @@ footer {
 }
 
 .highlight {
-    color: #ff3399;
+    color: #0ce6f2;
     /* Pink highlight */
 }
 
