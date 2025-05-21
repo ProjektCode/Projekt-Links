@@ -2,9 +2,11 @@
     0% {
         box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
     }
+
     50% {
         box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
     }
+
     100% {
         box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
     }
@@ -16,25 +18,25 @@ body {
     margin: 0;
     padding: 0;
     text-align: center;
-    color: #FFFFFF; /* Primary text color */
+    color: #FFFFFF;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100vh; /* Full viewport height */
-    overflow: hidden; /* Remove scroll bars */
+    height: 100vh;
+    overflow: hidden;
 }
 
 .container {
-    width: 100%;
+    width: 90%;
     max-width: 600px;
     margin: auto;
     background: #990000;
     padding: 20px;
-    border: 2px solid #FFFFFF; /* White stroke (border) */
-    box-shadow: 0 0 30px rgba(255, 255, 255, 0.05); /* Default box shadow */
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
     border-radius: 10px;
-    animation: pulse-shadow 4s infinite; /* Apply the pulse shadow animation */
+    animation: pulse-shadow 4s infinite;
 }
 
 img {
@@ -45,78 +47,70 @@ img {
 
 h1 {
     font-family: 'Roboto', sans-serif;
-    font-weight: 700; /* Ensure bold weight */
+    font-weight: 700;
     margin: 10px 0;
-    color: #FFFFFF; /* White color for the title */
+    color: #FFFFFF;
 }
 
 p {
-    font-family: 'Raleway', sans-serif;
-    color: #FFFFFF; /* Primary text color */
+    color: #FFFFFF;
 }
 
 .separator {
     width: 80%;
     height: 1px;
-    background-color: #FFFFFF; /* White color for the line */
-    margin: 20px auto; /* Spacing around the line */
-    border: none; /* Remove default border */
+    background-color: #FFFFFF;
+    margin: 20px auto;
+    border: none;
 }
 
 .link-container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Two buttons per row */
+    grid-template-columns: 1fr;
     gap: 10px;
     margin-top: 20px;
-    justify-items: center; /* Center the buttons horizontally */
+    justify-items: center;
 }
 
 .button {
     display: flex;
     align-items: center;
-    justify-content: center; /* Center content horizontally */
-    padding: 5px; /* Decreased padding */
-    color: #FFFFFF; /* White color for link text */
-    background: #CC0033; /* Slightly lighter red for links */
+    justify-content: center;
+    padding: 5px;
+    color: #FFFFFF;
+    background: #CC0033;
     font-family: 'Nunito', sans-serif;
     text-decoration: none;
     border-radius: 5px;
     transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
-    height: 40px; /* Decreased height for smaller buttons */
-    width: 200px; /* Fixed width for buttons */
+    height: 40px;
+    width: 200px;
     text-align: center;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Subtle black drop shadow */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
-.button:nth-child(odd) {
-    margin-right: -35px; /* Decrease right margin for left buttons */
-}
-
-.button:nth-child(even) {
-    margin-left: -35px; /* Decrease left margin for right buttons */
-}
-
-.button i, .button img {
-    margin-right: 5px; /* Spacing between icon and text */
+.button i,
+.button img {
+    margin-right: 5px;
 }
 
 .button:hover {
-    background: #DC143C; /* Crimson color on hover */
+    background: #DC143C;
     transform: scale(1.05);
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.7); /* White drop shadow on hover */
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
 }
 
 i {
-    color: #FFFFFF; /* White color for icons */
+    color: #FFFFFF;
 }
 
 .custom-icon {
-    font-size: 2em; /* Custom size for the icon */
+    font-size: 2em;
 }
 
 .icon {
-    width: 24px; /* Adjust size to match other icons */
-    height: 24px; /* Adjust size to match other icons */
+    width: 24px;
+    height: 24px;
     vertical-align: middle;
 }
 
@@ -127,39 +121,38 @@ footer {
     color: #FFFFFF;
     text-align: center;
     position: relative;
-    font-style: italic; /* Italicized font */
+    font-style: italic;
 }
 
 .attribution {
     position: absolute;
     bottom: 10px;
+    left: 10px;
     right: 10px;
-    left: 10px; /* Added to center the attribution */
-    font-size: 12px; /* Smaller font size */
-    text-align: center; /* Center the text horizontally */
+    font-size: 12px;
+    text-align: center;
 }
 
 .attribution a {
-    color: #FFFFFF; /* White color for the links */
-    text-decoration: none; /* Remove underline */
+    color: #FFFFFF;
+    text-decoration: none;
 }
 
-.attribution a:hover, .attribution a:focus, .attribution a:active, .attribution a:visited {
-    color: #FFFFFF; /* Ensure links remain white */
-    text-decoration: underline; /* Optionally add underline on hover/focus */
+.attribution a:hover,
+.attribution a:focus,
+.attribution a:active,
+.attribution a:visited {
+    color: #FFFFFF;
+    text-decoration: underline;
 }
 
 .highlight {
-    color: #CC0033; /* Red color used in the background of the main container of the links */
+    color: #CC0033;
 }
 
-/* Media Queries for Mobile Responsiveness */
+/* Media Query for Tablets and Up */
 @media (min-width: 600px) {
     .link-container {
-        grid-template-columns: repeat(2, 1fr); /* Ensure two buttons per row on larger screens */
-    }
-
-    .button {
-        justify-content: center; /* Center content horizontally on larger screens */
+        grid-template-columns: repeat(2, 1fr);
     }
 }
