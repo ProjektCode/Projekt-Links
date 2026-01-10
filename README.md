@@ -1,0 +1,81 @@
+# 🔗 ProjektCode Links
+
+A modern, dynamic bio links page with GitHub integration, live music streaming, and beautiful animations.
+
+![Preview](https://projektcode.github.io/Links-Website/images/profilepic.png)
+
+## ✨ Features
+
+- **Dynamic GitHub Integration** - Real-time stats, pinned repos, and recent activity
+- **LISTEN.moe Music Player** - Live Japanese radio with WebSocket song metadata
+- **Color Extraction** - Theme colors dynamically extracted from profile picture
+- **Time-Based Status** - Online/Away indicator based on LA timezone (9 AM - 11 PM)
+- **View Counter** - Tracks page visits via CountAPI
+- **Smooth Animations** - GSAP-powered entrance animations and typing effect
+
+## 🛠️ Tech Stack
+
+- **HTML5 / CSS3 / Vanilla JS** - No frameworks, fast and lightweight
+- **GSAP** - Animation library
+- **GitHub Actions** - Auto-updates pinned repos daily
+- **APIs Used:**
+  - GitHub REST & GraphQL API
+  - LISTEN.moe WebSocket
+  - CountAPI
+  - GitHub Contributions API
+
+## 📁 Project Structure
+
+```
+Bio Links/
+├── index.html              # Main page
+├── styles.css              # All styles
+├── images/
+│   └── profilepic.png      # Avatar (also used as favicon)
+├── js/
+│   ├── profile.js          # Main controller
+│   ├── animations.js       # GSAP + typing effects
+│   ├── colors.js           # Color extraction
+│   ├── github.js           # GitHub API
+│   ├── github-config.js    # Pinned repos (auto-updated)
+│   ├── audio.js            # LISTEN.moe player
+│   ├── stats.js            # View counter
+│   └── status.js           # Time-based status
+└── .github/workflows/
+    └── update-pinned-repos.yml  # Daily pinned repo sync
+```
+
+## ⚙️ Configuration
+
+### GitHub Pinned Repos
+Automatically updated daily via GitHub Actions. To trigger manually:
+1. Go to **Actions** tab
+2. Select **"Update Pinned Repos"**
+3. Click **"Run workflow"**
+
+Requires `PINNED_REPOS` secret (GitHub PAT with `read:user` scope).
+
+### Status Hours
+Edit `js/status.js` to change online hours:
+```javascript
+const ONLINE_START = 9;   // 9 AM
+const ONLINE_END = 23;    // 11 PM
+```
+
+### Music Volume
+Edit `js/audio.js`:
+```javascript
+audio.volume = 0.003;  // 0.3% volume
+```
+
+## 🚀 Deployment
+
+Hosted on GitHub Pages. Push to `main` branch to deploy.
+
+## 📄 License
+
+MIT License - Feel free to use this as inspiration for your own links page!
+
+---
+
+Made with ♥ by [ProjektCode](https://github.com/ProjektCode)
