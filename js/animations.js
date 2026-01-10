@@ -12,11 +12,11 @@
  */
 export function startTypingLoop(element, text, options = {}) {
     const {
-        typingSpeed = 50,
+        typingSpeed = 20,
         deleteSpeed = 30,
-        initialDelay = 1500,        // Delay before typing starts
-        pauseBeforeDelete = 5000,   // Pause after typing, before deleting
-        pauseAfterDelete = 2000     // Pause after deleting, before retyping
+        initialDelay = 2000,        // 2s delay before typing starts
+        pauseBeforeDelete = 10000,   // 10s pause after typing, before deleting
+        pauseAfterDelete = 5000     // 5s pause after deleting, before retyping
     } = options;
 
     // Clear existing content
