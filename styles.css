@@ -131,8 +131,8 @@ body {
 /* === MAIN CONTAINER === */
 .container {
     width: 100%;
-    max-width: 420px;
-    padding: var(--spacing-lg);
+    max-width: 700px;
+    padding: var(--spacing-md);
     animation: fadeInUp 0.8s ease-out;
 }
 
@@ -155,31 +155,45 @@ body {
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-lg);
-    padding: var(--spacing-xl);
+    padding: var(--spacing-lg) var(--spacing-xl);
     box-shadow:
         0 8px 32px rgba(0, 0, 0, 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-/* === PROFILE SECTION === */
-.profile {
-    text-align: center;
-    margin-bottom: var(--spacing-xl);
+/* === WALLPAPER OVERLAY === */
+.wallpaper-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: url('images/wallpaper.png') center/cover no-repeat;
+    opacity: 0.15;
+    mix-blend-mode: overlay;
+}
+
+/* === PROFILE HEADER (Avatar + Info side-by-side) === */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--glass-border);
 }
 
 .avatar-wrapper {
-    position: relative;
-    display: inline-block;
-    margin-bottom: var(--spacing-lg);
+    flex-shrink: 0;
 }
 
 .avatar {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     border-radius: var(--radius-full);
     object-fit: cover;
     border: 2px solid var(--primary);
-    position: relative;
     transition: all var(--transition-normal);
 }
 
@@ -188,10 +202,15 @@ body {
     transform: scale(1.02);
 }
 
+.profile-info {
+    flex: 1;
+    min-width: 0;
+}
+
 /* === NAME WITH GRADIENT ANIMATION === */
 .name {
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: var(--spacing-xs);
     background: linear-gradient(90deg,
@@ -219,14 +238,12 @@ body {
     }
 }
 
-/* === BIO TYPING CURSOR === */
+/* === BIO === */
 .bio {
     color: var(--text-secondary);
-    font-size: 0.95rem;
-    max-width: 300px;
-    margin: 0 auto;
+    font-size: 0.9rem;
     line-height: 1.5;
-    min-height: 3em;
+    min-height: 2.5em;
 }
 
 .typing-cursor {
@@ -248,18 +265,20 @@ body {
     }
 }
 
-/* === LINK BUTTONS === */
+/* === LINK BUTTONS (BENTO GRID) === */
 .links {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-sm);
 }
 
 .link-btn {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: var(--spacing-md);
-    padding: var(--spacing-md) var(--spacing-lg);
+    justify-content: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-md);
     background: var(--surface);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
@@ -269,6 +288,7 @@ body {
     transition: all var(--transition-normal);
     position: relative;
     overflow: hidden;
+    text-align: center;
 }
 
 .link-btn::before {
@@ -294,8 +314,9 @@ body {
 }
 
 .link-btn i:first-child {
-    font-size: 1.2rem;
-    width: 24px;
+    font-size: 1.8rem;
+    width: auto;
+    margin-bottom: var(--spacing-xs);
     text-align: center;
     color: var(--text-secondary);
     transition: color var(--transition-normal);
@@ -308,22 +329,13 @@ body {
 }
 
 .link-btn span {
-    flex: 1;
+    flex: initial;
     position: relative;
     z-index: 1;
 }
 
 .link-btn .arrow {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    transition: all var(--transition-normal);
-    position: relative;
-    z-index: 1;
-}
-
-.link-btn:hover .arrow {
-    color: var(--primary);
-    transform: translateX(4px);
+    display: none;
 }
 
 /* === FOOTER === */
@@ -332,6 +344,7 @@ body {
     margin-top: var(--spacing-xl);
     padding-top: var(--spacing-lg);
     border-top: 1px solid var(--glass-border);
+    width: 100%;
 }
 
 .footer p {
@@ -657,4 +670,40 @@ body {
 .github-section:has(.repos-grid:empty),
 .github-section:has(.activity-list:empty) {
     display: none;
+}
+
+/* ============================================
+   GITHUB ROW (Repos + Activity side-by-side)
+   ============================================ */
+.github-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+.github-row .github-section {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+}
+
+/* Mobile: Stack github-row */
+@media (max-width: 600px) {
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-info {
+        text-align: center;
+    }
+
+    .github-row {
+        grid-template-columns: 1fr;
+    }
+
+    .links {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }

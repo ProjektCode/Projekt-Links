@@ -234,12 +234,31 @@ export function getTopRepos(repos, limit = 4) {
 }
 
 /**
+ * Fetch total contributions from external API
+ */
+export async function fetchTotalContributions(username) {
+    try {
+        const response = await fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=last`);
+        if (!response.ok) throw new Error('Contributions API error');
+        const data = await response.json();
+
+        // Sum total contributions
+        const total = Object.values(data.total).reduce((a, b) => a + b, 0);
+        return total;
+    } catch (error) {
+        console.error('Failed to fetch contributions:', error);
+        return 0;
+    }
+}
+
+/**
  * Load all GitHub data for a user
  */
 export async function loadGitHubData(username) {
-    const [profile, repos] = await Promise.all([
+    const [profile, repos, contributions] = await Promise.all([
         fetchGitHubProfile(username),
-        fetchRepos(username)
+        fetchRepos(username),
+        fetchTotalContributions(username)
     ]);
 
     if (!profile) {
@@ -275,7 +294,8 @@ export async function loadGitHubData(username) {
             publicRepos: profile.public_repos,
             followers: profile.followers,
             following: profile.following,
-            totalStars
+            totalStars,
+            totalContributions: contributions
         }
     };
 }

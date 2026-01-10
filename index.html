@@ -25,26 +25,27 @@
 <body>
     <!-- Subtle Gradient Background -->
     <div class="bg-gradient"></div>
+    <div class="wallpaper-overlay"></div>
     <div class="noise-overlay"></div>
 
     <!-- Main Content -->
     <main class="container">
         <div class="card">
-            <!-- Profile Section -->
-            <div class="profile">
+            <!-- Profile Header: Avatar + Info Side by Side -->
+            <div class="profile-header">
                 <div class="avatar-wrapper">
-                    <img id="profile-pic" class="avatar" src="images/profilepic.png" alt="ProjektCode's Avatar"
-                        crossorigin="anonymous">
+                    <img id="profile-pic" class="avatar" src="images/profilepic.png" alt="ProjektCode's Avatar">
                 </div>
-
-                <h1 id="profile-name" class="name">ProjektCode</h1>
-
-                <!-- GitHub Stats -->
-                <div id="github-stats" class="github-stats"></div>
-
-                <p id="profile-bio" class="bio">A beginner programmer, and graphics designer who makes things for fun.
-                    Currently learning IT, HomeLab, and Docker.</p>
+                <div class="profile-info">
+                    <h1 id="profile-name" class="name">ProjektCode</h1>
+                    <p id="profile-bio" class="bio">A beginner programmer, and graphics designer who makes things for
+                        fun.
+                        Currently learning IT, HomeLab, and Docker.</p>
+                </div>
             </div>
+
+            <!-- Stats Row -->
+            <div id="github-stats" class="github-stats"></div>
 
             <!-- Link Buttons -->
             <div class="links">
@@ -52,36 +53,33 @@
                     id="profile-github">
                     <i class="fab fa-github"></i>
                     <span>GitHub</span>
-                    <i class="fas fa-arrow-right arrow"></i>
                 </a>
                 <a href="https://www.behance.net/projekt02" target="_blank" rel="noopener" class="link-btn">
                     <i class="fab fa-behance"></i>
                     <span>Behance</span>
-                    <i class="fas fa-arrow-right arrow"></i>
                 </a>
                 <a href="https://www.youtube.com/@ProjektDesigns" target="_blank" rel="noopener" class="link-btn">
                     <i class="fab fa-youtube"></i>
                     <span>YouTube</span>
-                    <i class="fas fa-arrow-right arrow"></i>
                 </a>
                 <a href="https://www.fiverr.com/sopmod" target="_blank" rel="noopener" class="link-btn">
                     <i class="fas fa-briefcase"></i>
                     <span>Fiverr</span>
-                    <i class="fas fa-arrow-right arrow"></i>
                 </a>
             </div>
 
-            <!-- Pinned Repositories -->
-            <section class="github-section" id="pinned-repos-section">
-                <h2 class="section-title"><i class="fas fa-book"></i> Pinned Repos</h2>
-                <div id="pinned-repos" class="repos-grid"></div>
-            </section>
+            <!-- Pinned Repos & Recent Activity Side by Side -->
+            <div class="github-row">
+                <section class="github-section" id="pinned-repos-section">
+                    <h2 class="section-title"><i class="fas fa-book"></i> Pinned Repos</h2>
+                    <div id="pinned-repos" class="repos-grid"></div>
+                </section>
 
-            <!-- Recent Activity -->
-            <section class="github-section" id="activity-section">
-                <h2 class="section-title"><i class="fas fa-clock-rotate-left"></i> Recent Activity</h2>
-                <div id="recent-activity" class="activity-list"></div>
-            </section>
+                <section class="github-section" id="activity-section">
+                    <h2 class="section-title"><i class="fas fa-clock-rotate-left"></i> Recent Activity</h2>
+                    <div id="recent-activity" class="activity-list"></div>
+                </section>
+            </div>
 
             <!-- Footer -->
             <footer class="footer">

@@ -99,9 +99,9 @@ function renderStats(stats) {
             <span class="stat-label">Repos</span>
         </div>
         <div class="stat-item">
-            <i class="fas fa-star"></i>
-            <span class="stat-value">${stats.totalStars}</span>
-            <span class="stat-label">Stars</span>
+            <i class="fas fa-chart-line"></i>
+            <span class="stat-value">${stats.totalContributions}</span>
+            <span class="stat-label">Contribs</span>
         </div>
         <div class="stat-item">
             <i class="fas fa-users"></i>
