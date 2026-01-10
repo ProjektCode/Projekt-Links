@@ -1,7 +1,11 @@
 /**
  * UI animations module
- * Handles typing effects, link animations, and ripple effects
+ * Handles typing effects, link animations, ripple effects, and GSAP entrance animations
  */
+
+// ============================================================================
+// TYPING ANIMATION
+// ============================================================================
 
 /**
  * Typing animation with reverse (backspace) effect and persistent cursor
@@ -59,6 +63,10 @@ export function startTypingLoop(element, text, options = {}) {
     animate();
 }
 
+// ============================================================================
+// LINK ANIMATIONS
+// ============================================================================
+
 /**
  * Add staggered animation to link buttons on page load
  */
@@ -105,6 +113,174 @@ export function addRippleEffect() {
             // Remove ripple after animation
             ripple.addEventListener('animationend', () => {
                 ripple.remove();
+            });
+        });
+    });
+}
+
+// ============================================================================
+// GSAP ENTRANCE ANIMATIONS
+// ============================================================================
+
+/**
+ * Initialize GSAP entrance animations
+ * One-time animations that play when the page loads
+ */
+export function initEntranceAnimations() {
+    // Check if GSAP is loaded
+    if (typeof gsap === 'undefined') {
+        console.warn('GSAP not loaded, entrance animations disabled');
+        return;
+    }
+
+    // Master timeline for sequenced animations
+    const tl = gsap.timeline({
+        defaults: {
+            ease: 'power3.out',
+            duration: 0.8
+        }
+    });
+
+    // Initial states (hidden)
+    gsap.set('.card', { opacity: 0, scale: 0.95, y: 30 });
+    gsap.set('.avatar', { opacity: 0, scale: 0.5 });
+    gsap.set('.profile-info', { opacity: 0, x: 30 });
+    gsap.set('.stat-item', { opacity: 0, y: 20 });
+    gsap.set('.link-btn', { opacity: 0, y: 25, scale: 0.95 });
+    gsap.set('.github-section', { opacity: 0, y: 20 });
+
+    // Animation sequence
+    tl
+        // Card entrance
+        .to('.card', {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            duration: 0.6,
+            ease: 'power2.out'
+        })
+
+        // Avatar pop-in with elastic bounce
+        .to('.avatar', {
+            opacity: 1,
+            scale: 1,
+            duration: 0.7,
+            ease: 'elastic.out(1, 0.5)'
+        }, '-=0.3')
+
+        // Avatar glow pulse
+        .to('.avatar', {
+            boxShadow: '0 0 30px var(--primary-glow), 0 0 60px var(--primary-glow)',
+            duration: 0.4,
+            ease: 'power2.out'
+        }, '-=0.3')
+        .to('.avatar', {
+            boxShadow: '0 0 0px transparent',
+            duration: 0.6,
+            ease: 'power2.inOut'
+        })
+
+        // Profile info slide in
+        .to('.profile-info', {
+            opacity: 1,
+            x: 0,
+            duration: 0.5,
+            ease: 'power2.out'
+        }, '-=0.8')
+
+        // Stats stagger in
+        .to('.stat-item', {
+            opacity: 1,
+            y: 0,
+            duration: 0.4,
+            stagger: 0.1,
+            ease: 'back.out(1.5)'
+        }, '-=0.4')
+
+        // Links stagger up from bottom
+        .to('.link-btn', {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.5,
+            stagger: {
+                amount: 0.4,
+                from: 'start'
+            },
+            ease: 'back.out(1.2)'
+        }, '-=0.3')
+
+        // GitHub sections fade in
+        .to('.github-section', {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            stagger: 0.15,
+            ease: 'power2.out'
+        }, '-=0.3');
+}
+
+/**
+ * Initialize GSAP hover micro-interactions
+ */
+export function initHoverEffects() {
+    if (typeof gsap === 'undefined') return;
+
+    // Link buttons hover
+    document.querySelectorAll('.link-btn').forEach(btn => {
+        btn.addEventListener('mouseenter', () => {
+            gsap.to(btn, {
+                scale: 1.05,
+                duration: 0.2,
+                ease: 'power2.out'
+            });
+        });
+        btn.addEventListener('mouseleave', () => {
+            gsap.to(btn, {
+                scale: 1,
+                duration: 0.3,
+                ease: 'elastic.out(1, 0.5)'
+            });
+        });
+    });
+
+    // Avatar hover
+    const avatar = document.querySelector('.avatar');
+    if (avatar) {
+        avatar.addEventListener('mouseenter', () => {
+            gsap.to(avatar, {
+                scale: 1.08,
+                boxShadow: '0 0 25px var(--primary-glow)',
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+        });
+        avatar.addEventListener('mouseleave', () => {
+            gsap.to(avatar, {
+                scale: 1,
+                boxShadow: '0 0 0px transparent',
+                duration: 0.4,
+                ease: 'power2.inOut'
+            });
+        });
+    }
+
+    // Stats hover
+    document.querySelectorAll('.stat-item').forEach(stat => {
+        stat.addEventListener('mouseenter', () => {
+            gsap.to(stat, {
+                y: -3,
+                scale: 1.05,
+                duration: 0.2,
+                ease: 'power2.out'
+            });
+        });
+        stat.addEventListener('mouseleave', () => {
+            gsap.to(stat, {
+                y: 0,
+                scale: 1,
+                duration: 0.3,
+                ease: 'power2.out'
             });
         });
     });

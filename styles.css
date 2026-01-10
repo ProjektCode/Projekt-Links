@@ -32,13 +32,13 @@
     --text-secondary: rgba(255, 255, 255, 0.7);
     --text-muted: rgba(255, 255, 255, 0.5);
 
-    /* Spacing */
-    --spacing-xs: 0.5rem;
-    --spacing-sm: 0.75rem;
-    --spacing-md: 1rem;
-    --spacing-lg: 1.5rem;
-    --spacing-xl: 2rem;
-    --spacing-2xl: 3rem;
+    /* Spacing (compact) */
+    --spacing-xs: 0.35rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 0.75rem;
+    --spacing-lg: 1rem;
+    --spacing-xl: 1.5rem;
+    --spacing-2xl: 2rem;
 
     /* Border Radius */
     --radius-sm: 8px;
@@ -133,7 +133,6 @@ body {
     width: 100%;
     max-width: 700px;
     padding: var(--spacing-md);
-    animation: fadeInUp 0.8s ease-out;
 }
 
 @keyframes fadeInUp {
@@ -161,19 +160,6 @@ body {
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-/* === WALLPAPER OVERLAY === */
-.wallpaper-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background: url('images/wallpaper.png') center/cover no-repeat;
-    opacity: 0.15;
-    mix-blend-mode: overlay;
-}
-
 /* === PROFILE HEADER (Avatar + Info side-by-side) === */
 .profile-header {
     display: flex;
@@ -189,8 +175,8 @@ body {
 }
 
 .avatar {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border-radius: var(--radius-full);
     object-fit: cover;
     border: 2px solid var(--primary);
@@ -210,7 +196,7 @@ body {
 /* === NAME WITH GRADIENT ANIMATION === */
 .name {
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 700;
     margin-bottom: var(--spacing-xs);
     background: linear-gradient(90deg,
@@ -241,9 +227,102 @@ body {
 /* === BIO === */
 .bio {
     color: var(--text-secondary);
-    font-size: 0.9rem;
-    line-height: 1.5;
-    min-height: 2.5em;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    height: 2.5em;
+    overflow: hidden;
+}
+
+/* ============================================
+   INLINE MUSIC PLAYER
+   ============================================ */
+
+.music-player {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-normal);
+}
+
+.music-player:hover {
+    border-color: var(--primary);
+    box-shadow: 0 4px 20px var(--primary-glow);
+}
+
+.player-toggle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: none;
+    color: white;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.player-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px var(--primary-glow);
+}
+
+.player-toggle.playing {
+    animation: pulsePlay 1.5s ease-in-out infinite;
+}
+
+@keyframes pulsePlay {
+
+    0%,
+    100% {
+        box-shadow: 0 0 5px var(--primary-glow);
+    }
+
+    50% {
+        box-shadow: 0 0 20px var(--primary-glow), 0 0 30px var(--primary-glow);
+    }
+}
+
+.player-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    flex: 1;
+}
+
+.player-label {
+    font-size: 0.55rem;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.player-song {
+    font-size: 0.75rem;
+    color: var(--text-primary);
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.player-artist {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .typing-cursor {
@@ -460,6 +539,8 @@ body {
     border: 1px solid var(--glass-border);
     min-width: 70px;
     transition: all var(--transition-normal);
+    cursor: default;
+    user-select: none;
 }
 
 .stat-item:hover {
@@ -636,6 +717,8 @@ body {
     border-radius: var(--radius-sm);
     border: 1px solid transparent;
     transition: all var(--transition-fast);
+    cursor: default;
+    user-select: none;
 }
 
 .activity-item:hover {
@@ -706,4 +789,75 @@ body {
     .links {
         grid-template-columns: repeat(2, 1fr);
     }
+}
+
+/* ============================================
+   NAME ROW & ONLINE STATUS
+   ============================================ */
+
+.name-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    background: #22c55e;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #22c55e, 0 0 16px #22c55e;
+    animation: statusPulse 2s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.7;
+        transform: scale(0.9);
+    }
+}
+
+/* ============================================
+   VIEW COUNTER & STREAM CREDIT
+   ============================================ */
+
+.view-counter,
+.stream-credit {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: var(--spacing-xs);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.view-counter i,
+.stream-credit i {
+    font-size: 0.65rem;
+    opacity: 0.7;
+}
+
+.stream-credit a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.stream-credit a:hover {
+    color: var(--text-primary);
+    text-decoration: underline;
 }

@@ -3,9 +3,9 @@
  * Coordinates profile loading, color theming, and GitHub data display
  */
 
-import { extractDominantColor, applyColors } from './js/colors.js';
-import { startTypingLoop, animateLinks, addRippleEffect } from './js/animations.js';
-import { loadGitHubData } from './js/github.js';
+import { extractDominantColor, applyColors } from './colors.js';
+import { startTypingLoop, animateLinks, addRippleEffect, initEntranceAnimations, initHoverEffects } from './animations.js';
+import { loadGitHubData } from './github.js';
 
 // ============================================================================
 // CONFIGURATION
@@ -192,7 +192,11 @@ function getLanguageColor(language) {
 // ============================================================================
 
 async function init() {
-    // Start animations immediately
+    // Start GSAP entrance animations
+    initEntranceAnimations();
+    initHoverEffects();
+
+    // Start CSS animations
     animateLinks();
     addRippleEffect();
 
