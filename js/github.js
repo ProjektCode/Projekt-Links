@@ -1,20 +1,61 @@
 /**
  * GitHub API integration module
  * Fetches profile data, stats, repos, and activity from GitHub
+ * Uses localStorage caching to avoid rate limits
  */
 
 import { GITHUB_CONFIG } from './github-config.js';
 
 const GITHUB_API = 'https://api.github.com';
+const CACHE_DURATION = 60 * 60 * 1000; // 1 hour in milliseconds
 
 /**
- * Fetch GitHub user profile
+ * Get cached data if still valid
+ */
+function getCache(key) {
+    try {
+        const cached = localStorage.getItem(`gh_${key}`);
+        if (!cached) return null;
+
+        const { data, timestamp } = JSON.parse(cached);
+        if (Date.now() - timestamp > CACHE_DURATION) {
+            localStorage.removeItem(`gh_${key}`);
+            return null;
+        }
+        return data;
+    } catch {
+        return null;
+    }
+}
+
+/**
+ * Store data in cache
+ */
+function setCache(key, data) {
+    try {
+        localStorage.setItem(`gh_${key}`, JSON.stringify({
+            data,
+            timestamp: Date.now()
+        }));
+    } catch {
+        // localStorage full or unavailable
+    }
+}
+
+/**
+ * Fetch GitHub user profile (with caching)
  */
 export async function fetchGitHubProfile(username) {
+    const cacheKey = `profile_${username}`;
+    const cached = getCache(cacheKey);
+    if (cached) return cached;
+
     try {
         const response = await fetch(`${GITHUB_API}/users/${username}`);
         if (!response.ok) throw new Error('GitHub API error');
-        return await response.json();
+        const data = await response.json();
+        setCache(cacheKey, data);
+        return data;
     } catch (error) {
         console.error('Failed to fetch GitHub profile:', error);
         return null;
@@ -22,17 +63,22 @@ export async function fetchGitHubProfile(username) {
 }
 
 /**
- * Fetch user's public repositories
+ * Fetch user's public repositories (with caching)
  */
 export async function fetchRepos(username, options = {}) {
     const { sort = 'updated', perPage = 100 } = options;
+    const cacheKey = `repos_${username}`;
+    const cached = getCache(cacheKey);
+    if (cached) return cached;
 
     try {
         const response = await fetch(
             `${GITHUB_API}/users/${username}/repos?sort=${sort}&per_page=${perPage}`
         );
         if (!response.ok) throw new Error('GitHub API error');
-        return await response.json();
+        const data = await response.json();
+        setCache(cacheKey, data);
+        return data;
     } catch (error) {
         console.error('Failed to fetch repos:', error);
         return [];
@@ -40,9 +86,13 @@ export async function fetchRepos(username, options = {}) {
 }
 
 /**
- * Fetch user's recent activity (events)
+ * Fetch user's recent activity (with caching)
  */
 export async function fetchRecentActivity(username, limit = 5) {
+    const cacheKey = `activity_${username}`;
+    const cached = getCache(cacheKey);
+    if (cached) return cached;
+
     try {
         const response = await fetch(`${GITHUB_API}/users/${username}/events/public?per_page=30`);
         if (!response.ok) throw new Error('GitHub API error');
@@ -55,7 +105,9 @@ export async function fetchRecentActivity(username, limit = 5) {
             .filter(e => interestingTypes.includes(e.type))
             .slice(0, limit);
 
-        return filtered.map(formatEvent);
+        const formatted = filtered.map(formatEvent);
+        setCache(cacheKey, formatted);
+        return formatted;
     } catch (error) {
         console.error('Failed to fetch activity:', error);
         return [];
