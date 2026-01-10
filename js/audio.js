@@ -121,12 +121,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // Start WebSocket connection for metadata
     connectWebSocket();
 
-    // Restore playback state
-    const wasPlaying = localStorage.getItem('music-playing') === 'true';
-    if (wasPlaying) {
+    // Autoplay on page load (respects browser autoplay policies)
+    // If user previously paused, respect that choice
+    const userPaused = localStorage.getItem('music-playing') === 'false';
+
+    if (!userPaused) {
+        // Try to autoplay
         audio.play().then(() => {
             updateUI(true);
+            localStorage.setItem('music-playing', 'true');
         }).catch(() => {
+            // Autoplay blocked by browser, stay paused
             updateUI(false);
         });
     }

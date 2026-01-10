@@ -14,8 +14,9 @@ export function startTypingLoop(element, text, options = {}) {
     const {
         typingSpeed = 50,
         deleteSpeed = 30,
-        pauseBeforeDelete = 3000,
-        pauseAfterDelete = 500
+        initialDelay = 1500,        // Delay before typing starts
+        pauseBeforeDelete = 5000,   // Pause after typing, before deleting
+        pauseAfterDelete = 2000     // Pause after deleting, before retyping
     } = options;
 
     // Clear existing content
@@ -60,7 +61,8 @@ export function startTypingLoop(element, text, options = {}) {
         }
     }
 
-    animate();
+    // Start with initial delay
+    setTimeout(animate, initialDelay);
 }
 
 // ============================================================================
