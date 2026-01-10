@@ -2,7 +2,7 @@
 
 A modern, dynamic bio links page with GitHub integration, live music streaming, and beautiful animations.
 
-**🌐 Live Site:** [projektcode.github.io/Links-Website](https://projektcode.github.io/Links-Website)
+**🌐 Live Site:** [links.projectcode.com](https://links.projektcode.com)
 
 ![Preview](images/preview.png)
 
