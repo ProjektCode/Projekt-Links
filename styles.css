@@ -78,6 +78,7 @@ body {
 }
 
 /* === ANIMATED GRADIENT BACKGROUND === */
+/* Now acts as an overlay on top of the galaxy canvas */
 .bg-gradient {
     position: fixed;
     top: 0;
@@ -88,11 +89,10 @@ body {
     background:
         radial-gradient(ellipse at 20% 20%, var(--primary-glow) 0%, transparent 50%),
         radial-gradient(ellipse at 80% 80%, var(--secondary-glow) 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 50%, var(--accent-glow) 0%, transparent 60%),
-        linear-gradient(180deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
-    background-size: 200% 200%, 200% 200%, 150% 150%, 100% 100%;
+        radial-gradient(ellipse at 50% 50%, var(--accent-glow) 0%, transparent 60%);
+    background-size: 200% 200%, 200% 200%, 150% 150%;
     animation: gradientShift 15s ease-in-out infinite;
-    transition: background 1s ease;
+    pointer-events: none;
 }
 
 @keyframes gradientShift {
@@ -191,6 +191,8 @@ body {
 .profile-info {
     flex: 1;
     min-width: 0;
+    width: 100%;
+    /* Prevent width changes */
 }
 
 /* === NAME WITH GRADIENT ANIMATION === */
@@ -229,8 +231,11 @@ body {
     color: var(--text-secondary);
     font-size: 0.8rem;
     line-height: 1.4;
-    height: 2.5em;
+    min-height: 2.5em;
+    /* Use min-height instead of height */
     overflow: hidden;
+    width: 100%;
+    /* Fixed width */
 }
 
 /* ============================================
@@ -249,6 +254,9 @@ body {
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-lg);
     transition: all var(--transition-normal);
+    width: 100%;
+    /* Full width - prevents resize */
+    box-sizing: border-box;
 }
 
 .music-player:hover {

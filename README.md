@@ -2,9 +2,9 @@
 
 A modern, dynamic bio links page with GitHub integration, live music streaming, and beautiful animations.
 
-**🌐 Live Site:** [links.projectcode.com](https://links.projektcode.com)
+**🌐 Live Site:** [links.projektcode.com](https://links.projektcode.com)
 
-![Preview](images/preview.png)
+![Preview](images/preview.webp)
 
 ## ✨ Features
 
@@ -12,7 +12,7 @@ A modern, dynamic bio links page with GitHub integration, live music streaming, 
 - **LISTEN.moe Music Player** - Live Japanese radio with WebSocket song metadata
 - **Color Extraction** - Theme colors dynamically extracted from profile picture
 - **Time-Based Status** - Online/Away indicator based on LA timezone (9 AM - 11 PM)
-- **View Counter** - Tracks page visits via CountAPI
+- **View Counter** - Tracks page visits via CounterAPI
 - **Smooth Animations** - GSAP-powered entrance animations and typing effect
 
 ## 🛠️ Tech Stack
@@ -23,7 +23,7 @@ A modern, dynamic bio links page with GitHub integration, live music streaming, 
 - **APIs Used:**
   - GitHub REST & GraphQL API
   - LISTEN.moe WebSocket
-  - CountAPI
+  - CounterAPI
   - GitHub Contributions API
 
 ## 📁 Project Structure

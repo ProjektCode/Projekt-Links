@@ -12,7 +12,7 @@
  */
 export function startTypingLoop(element, text, options = {}) {
     const {
-        typingSpeed = 20,
+        typingSpeed = 50,
         deleteSpeed = 30,
         initialDelay = 2000,        // 2s delay before typing starts
         pauseBeforeDelete = 10000,   // 10s pause after typing, before deleting
