@@ -1,7 +1,7 @@
 /**
  * Hybrid Status Controller
- * Combines time-based status with GitHub activity detection
- * Shows "online" if within hours AND recent commit, otherwise "away"
+ * Shows "online" during active hours (9AM-11PM LA time)
+ * OR if there's recent GitHub activity (within 30 mins) during off-hours
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -11,9 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!statusDot || !statusIndicator) return;
 
     // Configuration
-    const ONLINE_START = 9;       // 9 AM LA time
-    const ONLINE_END = 23;        // 11 PM LA time
-    const ACTIVITY_THRESHOLD = 60; // Minutes - consider "active" if commit within this time
+    const ONLINE_START = 9;        // 9 AM LA time
+    const ONLINE_END = 23;         // 11 PM LA time
+    const ACTIVITY_THRESHOLD = 30; // Minutes - show online if commit within this time (off-hours only)
     const CHECK_INTERVAL = 60000;  // Check every minute
 
     // GitHub username
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * Check GitHub for recent activity
+     * Check GitHub for recent activity (used during off-hours)
      */
     async function hasRecentActivity() {
         try {
@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!response.ok) {
                 // If rate limited, assume no recent activity
+                cacheResult(false);
                 return false;
             }
 
@@ -88,12 +89,12 @@ document.addEventListener('DOMContentLoaded', () => {
     /**
      * Update the status indicator UI
      */
-    function setStatus(isOnline) {
+    function setStatus(isOnline, reason = '') {
         if (isOnline) {
             statusDot.style.background = '#22c55e';
             statusDot.style.boxShadow = '0 0 8px #22c55e, 0 0 16px #22c55e';
             statusDot.style.animation = 'statusPulse 2s ease-in-out infinite';
-            statusIndicator.title = 'Online - Recently active';
+            statusIndicator.title = reason || 'Online';
         } else {
             statusDot.style.background = '#6b7280';
             statusDot.style.boxShadow = '0 0 4px rgba(107, 114, 128, 0.5)';
@@ -106,15 +107,19 @@ document.addEventListener('DOMContentLoaded', () => {
      * Main status check
      */
     async function updateStatus() {
-        // Must be within time window first
-        if (!isWithinOnlineHours()) {
-            setStatus(false);
+        // Always online during active hours
+        if (isWithinOnlineHours()) {
+            setStatus(true, 'Online');
             return;
         }
 
-        // Within time window - check for recent activity
+        // Off-hours: check for recent GitHub activity
         const recentActivity = await hasRecentActivity();
-        setStatus(recentActivity);
+        if (recentActivity) {
+            setStatus(true, 'Online - Coding late');
+        } else {
+            setStatus(false);
+        }
     }
 
     // Initial check
