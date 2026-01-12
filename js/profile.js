@@ -63,7 +63,8 @@ function updateProfile({ image, name, bio, url }) {
     // Update profile picture and extract colors
     if (picEl && image) {
         picEl.crossOrigin = 'anonymous';
-        picEl.onload = async () => {
+
+        const extractColors = async () => {
             try {
                 const dominantColor = await extractDominantColor(picEl);
                 applyColors(dominantColor);
@@ -72,10 +73,16 @@ function updateProfile({ image, name, bio, url }) {
             }
         };
 
-        // Trigger onload if image already loaded
-        if (picEl.complete) {
-            picEl.onload();
+        // Check if this is a new image URL
+        const currentSrc = picEl.src;
+        const isSameImage = currentSrc === image || currentSrc.endsWith(image.split('/').pop());
+
+        if (isSameImage && picEl.complete) {
+            // Same image, already loaded - just extract colors
+            extractColors();
         } else {
+            // New image - update src and wait for load
+            picEl.onload = extractColors;
             picEl.src = image;
         }
     }
