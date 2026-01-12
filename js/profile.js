@@ -73,6 +73,14 @@ function updateProfile({ image, name, bio, url }) {
             }
         };
 
+        // Update favicon to match profile picture
+        const updateFavicon = (url) => {
+            const favicon = document.querySelector('link[rel="icon"]');
+            const appleTouchIcon = document.querySelector('link[rel="apple-touch-icon"]');
+            if (favicon) favicon.href = url;
+            if (appleTouchIcon) appleTouchIcon.href = url;
+        };
+
         // Check if this is a new image URL
         const currentSrc = picEl.src;
         const isSameImage = currentSrc === image || currentSrc.endsWith(image.split('/').pop());
@@ -81,9 +89,10 @@ function updateProfile({ image, name, bio, url }) {
             // Same image, already loaded - just extract colors
             extractColors();
         } else {
-            // New image - update src and wait for load
+            // New image - update src, favicon, and wait for load
             picEl.onload = extractColors;
             picEl.src = image;
+            updateFavicon(image);
         }
     }
 }
