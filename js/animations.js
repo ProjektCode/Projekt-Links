@@ -244,6 +244,23 @@ export function initHoverEffects() {
                 ease: 'elastic.out(1, 0.5)'
             });
         });
+        // Reset scale on click - fixes stuck hover state when opening new tabs
+        btn.addEventListener('click', () => {
+            gsap.to(btn, {
+                scale: 1,
+                duration: 0.15,
+                ease: 'power2.out'
+            });
+        });
+    });
+
+    // Reset button scales when returning to page (fixes stuck hover state after back navigation)
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') {
+            document.querySelectorAll('.link-btn').forEach(btn => {
+                gsap.set(btn, { scale: 1 });
+            });
+        }
     });
 
     // Avatar hover

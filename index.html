@@ -146,6 +146,16 @@
     <script src="js/stats.js"></script>
     <script src="js/status.js"></script>
     <script src="js/galaxy.js"></script>
+    
+    <!-- Fix for button focus persistence when opening new tabs -->
+    <script>
+        document.querySelectorAll('.link-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Blur the button after click to remove focus state
+                setTimeout(() => this.blur(), 100);
+            });
+        });
+    </script>
 </body>
 
 </html>

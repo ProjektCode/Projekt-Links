@@ -26,4 +26,4 @@ dist/
 build/
 
 # Conversation exports
-Refining Bio Links Site.md
+*.conversation.md

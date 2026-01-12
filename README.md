@@ -33,6 +33,7 @@ A modern, dynamic bio links page with GitHub integration, live music streaming, 
 Bio Links/
 ├── index.html              # Main page
 ├── styles.css              # All styles
+├── AGENTS.md               # AI agent documentation
 ├── images/
 │   └── profilepic.png      # Avatar (also used as favicon)
 ├── js/
@@ -43,7 +44,8 @@ Bio Links/
 │   ├── github-config.js    # Pinned repos (auto-updated)
 │   ├── audio.js            # LISTEN.moe player
 │   ├── stats.js            # View counter
-│   └── status.js           # Time-based status
+│   ├── status.js           # Time-based status
+│   └── galaxy.js           # Animated starfield background
 └── .github/workflows/
     └── update-pinned-repos.yml  # Daily pinned repo sync
 ```

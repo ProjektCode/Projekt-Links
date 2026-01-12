@@ -376,6 +376,8 @@ body {
     position: relative;
     overflow: hidden;
     text-align: center;
+    min-height: 80px;
+    height: 80px;
 }
 
 .link-btn::before {
@@ -398,6 +400,24 @@ body {
 
 .link-btn:hover::before {
     opacity: 0.15;
+}
+
+.link-btn:active {
+    transform: translateY(-1px) scale(1.01);
+}
+
+.link-btn:focus {
+    outline: none;
+}
+
+/* Only show focus ring for keyboard navigation, not mouse clicks */
+.link-btn:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.link-btn:active::before {
+    opacity: 0.1;
 }
 
 .link-btn i:first-child {
