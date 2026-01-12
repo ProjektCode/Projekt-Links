@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!audio || !toggleBtn) return;
 
     // Audio settings
-    audio.volume = 0.003; // Very subtle volume
+    audio.volume = 0.03; // Very subtle volume
 
     let isPlaying = false;
     let ws = null;
