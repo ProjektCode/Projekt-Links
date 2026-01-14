@@ -545,6 +545,46 @@ body {
 }
 
 /* ============================================
+   PROFILE DETAILS (Location & Email)
+   ============================================ */
+
+.profile-details {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.profile-detail-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+.profile-detail-item i {
+    color: var(--primary);
+    font-size: 0.8rem;
+}
+
+.profile-detail-item a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.profile-detail-item a:hover {
+    color: var(--primary);
+}
+
+/* Hide empty details section */
+.profile-details:empty {
+    display: none;
+}
+
+/* ============================================
    GITHUB STATS
    ============================================ */
 
@@ -863,7 +903,8 @@ body {
    ============================================ */
 
 .view-counter,
-.stream-credit {
+.stream-credit,
+.ide-credit {
     font-size: 0.7rem;
     color: var(--text-muted);
     margin-top: var(--spacing-xs);
@@ -874,7 +915,8 @@ body {
 }
 
 .view-counter i,
-.stream-credit i {
+.stream-credit i,
+.ide-credit i {
     font-size: 0.65rem;
     opacity: 0.7;
 }

@@ -213,6 +213,14 @@ btn.addEventListener('click', function() {
 **Cause**: Browser autoplay policies require user interaction before playing audio.
 **Solution**: Music attempts to autoplay but gracefully falls back. User preference is saved to localStorage.
 
+### Issue: Profile picture not updating when changed on GitHub
+**Cause**: Code checked if image element was `complete` before updating `src`, causing it to skip updating when GitHub returned a new avatar URL.
+**Solution**: Now compares URLs to detect changes and always updates `src` when different. Favicon also updates dynamically from GitHub avatar.
+
+### Issue: Favicon shows old image after profile picture update
+**Cause**: Favicon was hardcoded to local `images/profilepic.png` file.
+**Solution**: Favicon now updates dynamically when GitHub avatar loads. Local image serves as fallback if GitHub API fails.
+
 ---
 
 ## 🧪 Testing Locally

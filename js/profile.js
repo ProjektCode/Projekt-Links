@@ -31,6 +31,7 @@ const elements = {
     profileName: () => document.getElementById('profile-name'),
     profileBio: () => document.getElementById('profile-bio'),
     profileGithub: () => document.getElementById('profile-github'),
+    profileDetails: () => document.getElementById('profile-details'),
     statsContainer: () => document.getElementById('github-stats'),
     reposContainer: () => document.getElementById('pinned-repos'),
     activityContainer: () => document.getElementById('recent-activity')
@@ -95,6 +96,40 @@ function updateProfile({ image, name, bio, url }) {
             updateFavicon(image);
         }
     }
+}
+
+// ============================================================================
+// PROFILE DETAILS (Location & Email)
+// ============================================================================
+
+/**
+ * Render profile details (location, email) from GitHub
+ */
+function renderProfileDetails(profile) {
+    const container = elements.profileDetails();
+    if (!container || !profile) return;
+
+    const details = [];
+
+    if (profile.location) {
+        details.push(`
+            <div class="profile-detail-item">
+                <i class="fas fa-location-dot"></i>
+                <span>${profile.location}</span>
+            </div>
+        `);
+    }
+
+    if (profile.email) {
+        details.push(`
+            <div class="profile-detail-item">
+                <i class="fas fa-envelope"></i>
+                <a href="mailto:${profile.email}">${profile.email}</a>
+            </div>
+        `);
+    }
+
+    container.innerHTML = details.join('');
 }
 
 // ============================================================================
@@ -238,6 +273,7 @@ async function init() {
             });
 
             // Render GitHub sections
+            renderProfileDetails(data.profile);
             renderStats(data.stats);
             renderPinnedRepos(data.pinnedRepos);
             renderActivity(data.activity);
