@@ -4,8 +4,6 @@ A modern, dynamic bio links page with GitHub integration, live music streaming, 
 
 **🌐 Live Site:** [links.projektcode.com](https://links.projektcode.com)
 
-![Preview](images/preview.webp)
-
 ## ✨ Features
 
 - **Dynamic GitHub Integration** - Real-time stats, pinned repos, and recent activity
